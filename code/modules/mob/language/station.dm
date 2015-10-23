@@ -35,6 +35,14 @@
 	key = "-"
 	flags = RESTRICTED
 	syllables = list("beep", "boop", "buzz","beepleep","*","!")
+	
+/datum/language/Aviskree
+	name = "Aviachirp"
+	desc = "An expressive language is very beautiful except when you want to sleep."
+	speech_verb = "chirps"
+	colour = "Aviskree"
+	key = "]"
+	flags = RESTRICTED
 
 /datum/language/unathi
 	name = "Sinta'unathi"
