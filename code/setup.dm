@@ -723,11 +723,13 @@ var/list/be_special_flags = list(
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
 
 // Some on_mob_life() procs check for alien races.
-#define IS_DIONA  1
-#define IS_VOX    2
-#define IS_SKRELL 3
-#define IS_UNATHI 4
-#define IS_XENOS  5
+#define IS_DIONA   1
+#define IS_VOX     2
+#define IS_SKRELL  3
+#define IS_UNATHI  4
+#define IS_XENOS   5
+#define IS_KIDAN   6
+#define IS_MACHINE 7
 
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 

@@ -13,6 +13,28 @@
 	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
+	
+/datum/language/kidan
+	name = "Chittin"
+	desc = "The Kidan language."
+	speech_verb = "chirps and hums"
+	ask_verb = "chirps and hums"
+	exclaim_verb = "chirps"
+	colour = "Chittin"
+	key = "z"
+	flags = RESTRICTED
+	syllables = list("zz", "zzz", "mm", "ti")
+
+/datum/language/machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "pings"
+	colour = "machine"
+	key = "-"
+	flags = RESTRICTED
+	syllables = list("beep", "boop", "buzz","beepleep","*","!")
 
 /datum/language/unathi
 	name = "Sinta'unathi"
