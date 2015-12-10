@@ -11,12 +11,9 @@ var/list/admin_verbs_default = list(
 //	/client/proc/check_antagonists,		/*shows all antags*/
 	/client/proc/cmd_mentor_check_new_players,
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
-    /client/proc/clean,
-    /client/proc/cleartox,
-	/client/proc/admincryo,
-	/client/proc/alertlevel
 	)
 var/list/admin_verbs_admin = list(
+	/client/proc/roll_dices,
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
@@ -91,19 +88,16 @@ var/list/admin_verbs_admin = list(
 	/client/proc/allow_character_respawn,    /* Allows a ghost to respawn */
 	/client/proc/event_manager_panel,
 	/client/proc/empty_ai_core_toggle_latejoin,
-	/client/proc/empty_ai_core_toggle_latejoin,
-	/client/proc/aooc,
-	/client/proc/change_human_appearance_admin,	/* Allows an admin to change the basic appearance of human-based mobs */
-	/client/proc/change_human_appearance_self,	/* Allows the human-based mob itself change its basic appearance */
 	/client/proc/change_security_level,
-	/client/proc/view_chemical_reaction_logs,
 	/client/proc/makePAI,
 	/client/proc/FRules,
 	/client/proc/forceshuttles
 )
 var/list/admin_verbs_ban = list(
+	/client/proc/jobbans,
+	/client/proc/cmd_admin_subtle_message,
 	/client/proc/unban_panel,
-	/client/proc/jobbans
+	/client/proc/view_chemical_reaction_logs
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -124,7 +118,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/editappear,
-	/client/proc/roll_dices
+	/client/proc/debug_antagonist_template
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_fruit,
@@ -137,6 +131,7 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/spawn_chemdisp_cartridge
 	)
 var/list/admin_verbs_server = list(
+	/client/proc/alertlevel,
 	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
 	/datum/admins/proc/startnow,
@@ -167,7 +162,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
-	/client/proc/debug_antagonist_template,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
@@ -196,6 +190,8 @@ var/list/admin_verbs_paranoid_debug = list(
 	)
 
 var/list/admin_verbs_possess = list(
+	/client/proc/aooc,
+	/client/proc/admincryo,
 	/proc/possess,
 	/proc/release
 	)
@@ -278,6 +274,10 @@ var/list/admin_verbs_hideable = list(
 	/proc/release
 	)
 var/list/admin_verbs_mod = list(
+	/client/proc/change_human_appearance_admin,	/* Allows an admin to change the basic appearance of human-based mobs */
+	/client/proc/change_human_appearance_self,	/* Allows the human-based mob itself change its basic appearance */
+	/client/proc/clean,
+	/client/proc/cleartox,
 	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
 	/client/proc/cmd_admin_pm_panel,	/*admin-pm list*/
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game.*/
@@ -293,10 +293,9 @@ var/list/admin_verbs_mod = list(
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message,	/*send an message to somebody as a 'voice in their head'*/\
-	/client/proc/cmd_admin_rejuvenate
+	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/forceshuttles,
-	/client/proc/FRules,
-	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
+	/client/proc/FRules
 )
 
 var/list/admin_verbs_mentor = list(
@@ -307,9 +306,8 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
-	/client/proc/cmd_admin_subtle_message,
 	/client/proc/freeze,
-	/client/proc/freezemecha
+	/client/proc/freezemecha,
 	/client/proc/sendFax //*allows us to send a fax to a specific fax machine.*/
 )
 
