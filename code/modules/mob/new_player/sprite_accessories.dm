@@ -29,7 +29,7 @@
 	var/gender = NEUTER
 
 	// Restrict some styles to specific species
-	var/list/species_allowed = list("Human")
+	var/list/species_allowed = list("Human", "Aviskree")
 
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
@@ -678,6 +678,11 @@
 		name = "Tajara Sideburns"
 		icon_state = "facial_sideburns"
 		species_allowed = list("Tajara")
+
+	avis_beak
+		name = "Aviskree Beak"
+		icon_state = "facial_beak"
+		species_allowed = list("Aviskree")
 
 	taj_mutton
 		name = "Tajara Mutton"
