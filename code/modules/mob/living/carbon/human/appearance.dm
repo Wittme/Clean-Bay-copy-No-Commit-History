@@ -3,6 +3,11 @@
 	AC.flags = flags
 	AC.ui_interact(user, state = state)
 
+/mob/living/carbon/human/proc/change_race(var/flags = APPEARANCE_ALL_HAIR, var/location = src, var/mob/user = src, var/check_species_whitelist = 1, var/list/species_whitelist = list(), var/list/species_blacklist = list(), var/datum/topic_state/state = default_state)
+	var/obj/nano_module/race_changer/AC = new(location, src, check_species_whitelist, species_whitelist, species_blacklist)
+	AC.flags = flags
+	AC.ui_interact(user, state = state)
+
 /mob/living/carbon/human/proc/change_species(var/new_species)
 	if(!new_species)
 		return
