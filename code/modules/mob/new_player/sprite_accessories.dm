@@ -679,10 +679,16 @@
 		icon_state = "facial_sideburns"
 		species_allowed = list("Tajara")
 
-	avis_beak
-		name = "Aviskree Beak"
+	avis_beak_M
+		name = "Aviskree Beak M"
 		icon_state = "facial_beak"
 		species_allowed = list("Aviskree")
+
+	avis_beak_F
+		name = "Aviskree Beak F"
+		icon_state = "facial_beak"
+		species_allowed = list("Aviskree")
+		gender = FEMALE
 
 	taj_mutton
 		name = "Tajara Mutton"
