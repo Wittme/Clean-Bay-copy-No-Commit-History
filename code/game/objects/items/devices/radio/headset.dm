@@ -176,7 +176,7 @@
 	item_state = "headset"
 	ks2type = /obj/item/device/encryptionkey/heads/hop
 
-	/obj/item/device/radio/headset/heads/blueshield
+/obj/item/device/radio/headset/heads/blueshield
 	name = "blueshield guard's headset"
 	desc = "The headset of the guy who will one day be dead."
 	icon_state = "com_headset"
