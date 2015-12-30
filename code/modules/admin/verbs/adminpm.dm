@@ -109,9 +109,9 @@ var/isReply = 0
 	//non-admins shouldn't be able to disable this
 	if(C.prefs && C.prefs.toggles & SOUND_ADMINHELP)
 		if(isReply == 1)
-			C << 'sound/effects/adminhelp-reply.ogg'
-		else
 			C << 'sound/effects/adminhelp_new.ogg'
+		else
+			C << 'sound/effects/adminhelp-reply.ogg'
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	send2adminirc("Reply: [key_name(src)]->[key_name(C)]: [html_decode(msg)]")
