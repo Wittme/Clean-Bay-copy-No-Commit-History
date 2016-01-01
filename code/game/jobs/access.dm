@@ -66,7 +66,7 @@
 /var/const/access_medical_equip = 66
 /var/const/access_deptguard = 67
 /var/const/access_paramedic	= 68
-/var/const/access_blueshield= 69
+/var/const/access_blueshield = 69
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
