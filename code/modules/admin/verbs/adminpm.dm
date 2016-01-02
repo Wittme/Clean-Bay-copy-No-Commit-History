@@ -1,4 +1,5 @@
 //allows right clicking mobs to send an admin PM to their client, forwards the selected mob's client to cmd_admin_pm
+var/isReply = 0
 /client/proc/cmd_admin_pm_context(mob/M as mob in mob_list)
 	set category = null
 	set name = "Admin PM Mob"
@@ -131,7 +132,14 @@
 		if(X == C || X == src)
 			continue
 		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN/*|R_AUDITOR*/) || (X.holder.rights & (R_MOD|R_MENTOR/*|R_DEV*/)) )
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TAKE</A>):</B> \blue [msg]</font>" //inform X
+			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TA</A>):</B> \blue [msg]</font>" //inform X
+
+	for(var/client/X in admins)
+		//check client/X is an admin and isn't the sender or recipient
+		if(X == C || X == src)
+			continue
+		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN/*|R_AUDITOR*/) || (X.holder.rights & (R_MOD|R_MENTOR/*|R_DEV*/)) )
+			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;busy=\ref[C]'>BU</A>):</B> \blue [msg]</font>" //inform X
 
 /client/proc/cmd_admin_pm_antag(var/msg)
 	if(prefs.muted & MUTE_ADMINHELP)

@@ -1212,6 +1212,14 @@
 		for(var/client/X in admins)
 			X << take_msg
 
+	else if(href_list["busy"])
+		var/mob/M = locate(href_list["busy"])
+		var/take_msg = "\blue <b><font color=green><a href='?src=\ref[usr];priv_msg=\ref[M]'>[key_name(M)]</a> has been told we are too busy to answer by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
+		var/recieve_msg = "\red <b>Your request has been acknowledged, but due to more requests coming in, we may be unable to provide a response to you, as we might be working on different ahelps at the same time.</b>"
+		M << recieve_msg
+		for(var/client/X in admins)
+			X << take_msg
+
 	else if(href_list["takefax"])
 		var/mob/Sender = locate(href_list["takefax"])
 		var/take_msg = "\blue <b><font color=red><a href='?src=\ref[usr];priv_msg=\ref[Sender]'>[key_name(Sender)]</a> 's fax is being replied to by <a href='?src=\ref[usr];priv_msg=\ref[src.owner]'>[key_name(src.owner)]</a></font></b>"
