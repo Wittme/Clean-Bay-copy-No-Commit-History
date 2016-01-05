@@ -95,7 +95,7 @@
 	return
 
 //Shows today's attack log
-/*/datum/admins/proc/view_atk_log()
+/datum/admins/proc/view_atk_log()
 	set category = "Admin"
 	set name = "Show Server Attack Log"
 	set desc = "Shows today's server attack log."
@@ -109,4 +109,3 @@
 	usr << run( file(path) )
 	feedback_add_details("admin_verb","SSAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
-*/

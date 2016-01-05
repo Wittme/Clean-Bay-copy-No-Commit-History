@@ -52,3 +52,9 @@
 	..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
+
+/obj/effect/overlay/adminoverlay
+	name = "adminoverlay"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "admin"
+	layer = 4.1
