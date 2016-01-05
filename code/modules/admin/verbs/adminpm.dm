@@ -132,16 +132,9 @@ var/isReply = 0
 		if(X == C || X == src)
 			continue
 		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN/*|R_AUDITOR*/) || (X.holder.rights & (R_MOD|R_MENTOR/*|R_DEV*/)) )
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TA</A>):</B> \blue [msg]</font>" //inform X
+			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;takeadminhelp=\ref[C]'>TA</A>) (<A HREF='?_src_=holder;busy=\ref[C]'>BU</A>):</B> \blue [msg]</font>" //inform X
 
-	for(var/client/X in admins)
-		//check client/X is an admin and isn't the sender or recipient
-		if(X == C || X == src)
-			continue
-		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN/*|R_AUDITOR*/) || (X.holder.rights & (R_MOD|R_MENTOR/*|R_DEV*/)) )
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)] (<A HREF='?_src_=holder;busy=\ref[C]'>BU</A>):</B> \blue [msg]</font>" //inform X
-
-/client/proc/cmd_admin_pm_antag(var/msg)
+/client/proc/cmd_admin_pm_antag(var/msg, var/recieve_color = "purple")
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
 		return
@@ -159,8 +152,6 @@ var/isReply = 0
 	if(!check_rights(R_SERVER|R_DEBUG,0))
 		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
 		if(!msg)	return
-
-	var/recieve_color = "purple"
 
 	if(holder)
 		//mod PMs are maroon
