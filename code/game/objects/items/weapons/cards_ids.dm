@@ -291,3 +291,9 @@
 /obj/item/weapon/card/id/centcom/ERT/New()
 	..()
 	access += get_all_accesses()
+
+	/obj/item/weapon/card/id/blueshield
+	name = "Blueshield Card"
+	desc = "A Blueshield Card that shows authority"
+	icon_state = "centcom"
+	item_state = "silver_id"

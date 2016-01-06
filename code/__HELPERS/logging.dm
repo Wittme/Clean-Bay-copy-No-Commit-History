@@ -81,6 +81,10 @@
 
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
+	
+/proc/log_devsay(text)
+	if (config.log_devsay)
+		diary << "\[[time_stamp()]]DEVSAY: [text][log_end]"
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/print_dir(var/dir)
