@@ -1081,7 +1081,7 @@
 "uO" = (/turf/space,/area/centcom/evac)
 "uP" = (/obj/structure/flora/tree/dead,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/centcom/holding)
 "uQ" = (/obj/structure/flora/ausbushes/palebush,/turf/unsimulated/floor{icon_state = "grass1"; name = "grass"},/area/centcom/holding)
-"uR" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "centcom_dock_airlock"; locked = 1; name = "Arrivals Airlock"; req_access = list(13)},/turf/simulated/floor,/area/centcom/holding)
+"uR" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "Arrivals_shuttle_N"; locked = 1; name = "Docking Port Airlock"; req_access = list(13)},/turf/simulated/floor,/area/centcom/holding)
 "uS" = (/turf/simulated/floor,/area/centcom/holding)
 "uT" = (/obj/machinery/porta_turret/crescent,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor,/area/centcom/holding)
 "uU" = (/obj/effect/landmark{name = "Marauder Exit"},/turf/unsimulated/floor{name = "plating"},/area/centcom/specops)
