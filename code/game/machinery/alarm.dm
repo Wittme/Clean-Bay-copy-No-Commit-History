@@ -404,7 +404,7 @@
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "scrubbing"= 1, "panic_siphon"= 0) )
+				send_signal(device_id, list("power"= 1, "co2_scrub"= 1, "tox_scrub"= 1, "n2o_scrub"= 1, "scrubbing"= 1, "panic_siphon"= 0) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("power"= 1, "checks"= "default", "set_external_pressure"= "default") )
 
