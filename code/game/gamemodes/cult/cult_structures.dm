@@ -18,8 +18,8 @@
 	icon_state = "forge"
 
 /obj/structure/cult/pylon
-	name = "Pylon"
-	desc = "A floating crystal that hums with an unearthly energy"
+	name = "dissecting pylon"
+	desc = "A red construct stands before you, hoisted, suspended in air by unknown means. Your attention is drawn to the crystalline construct in the center. Seemingly completely matte, yet you can see through it, or into them."
 	icon_state = "pylon"
 	var/isbroken = 0
 	light_range = 5
@@ -39,7 +39,7 @@
 	if(!isbroken)
 		if(prob(1+ damage * 5))
 			user.visible_message(
-				"<span class='danger'>[user] smashed the pylon!</span>", 
+				"<span class='danger'>[user] smashed the pylon!</span>",
 				"<span class='warning'>You hit the pylon, and its crystal breaks apart!</span>",
 				"You hear a tinkle of crystal shards"
 				)

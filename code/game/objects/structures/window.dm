@@ -61,6 +61,17 @@
 			visible_message("Cracks begin to appear in [src]!" )
 	return
 
+/obj/structure/window/proc/take_damage_remote(var/damage = 0)
+
+	if(silicate)
+		damage = damage * (1 - silicate / 200)
+
+	health = max(0, health - damage)
+
+	if(health <= 0)
+		shatter_remote(0)
+	return
+
 /obj/structure/window/proc/apply_silicate(var/amount)
 	if(health < maxhealth) // Mend the damage
 		health = min(health + amount * 3, maxhealth)
@@ -96,6 +107,20 @@
 	qdel(src)
 	return
 
+/obj/structure/window/proc/shatter_remote(var/display_message = 1)
+	playsound(src, "shatter", 70, 1)
+	if(display_message)
+		visible_message("[src] shatters!")
+	if(dir == SOUTHWEST)
+		var/index = null
+		index = 0
+		while(index < 2)
+			new shardtype(loc) //todo pooling?
+			index++
+	else
+		new shardtype(loc) //todo pooling?
+	qdel(src)
+	return
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
 
@@ -297,7 +322,7 @@
 	// TODO :  Change to incapacitated() on merge.
 	if(usr.stat || usr.lying || usr.resting || usr.buckled)
 		return 0
-	
+
 	if(anchored)
 		usr << "It is fastened to the floor therefore you can't rotate it!"
 		return 0

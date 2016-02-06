@@ -236,8 +236,8 @@
 		healthcheck() //Send this to healthcheck just in case we want to do something else with it.
 
 /obj/structure/grille/cult
-	name = "cult grille"
-	desc = "A matrice built out of an unknown material, with some sort of force field blocking air around it"
+	name = "engraved grille"
+	desc = "The grille seems almost normal, at first glance. Your eyes trace the carved, almost stone-like weave. You feel as if you could scream, yet not be heard through this."
 	icon_state = "grillecult"
 	health = 40 //Make it strong enough to avoid people breaking in too easily
 

@@ -350,6 +350,9 @@ var/list/sacrificed = list()
 			body_to_sacrifice.visible_message("<span class='danger'>[body_to_sacrifice] is torn apart, a black smoke swiftly dissipating from \his remains!</span>", \
 			"<span class='danger'>You feel as your blood boils, tearing you apart.</span>", \
 			"<span class='danger'>You hear a thousand voices, all crying in pain.</span>")
+			for(var/obj/item/Player_Inventory in body_to_sacrifice)
+				if(istype(Player_Inventory, /obj/item/organ))
+					qdel(Player_Inventory)
 			body_to_sacrifice.gib()
 
 //			if(ticker.mode.name == "cult")
@@ -409,7 +412,7 @@ var/list/sacrificed = list()
 						L.ajourn=0
 						return
 					else
-						L.take_organ_damage(10, 0)
+						L.take_organ_damage(3, 0)
 					sleep(100)
 			return fizzle()
 
@@ -1051,7 +1054,7 @@ var/list/sacrificed = list()
 						admin_attack_log(usr, S, "Used a stun rune.", "Was victim of a stun rune.", "used a stun rune on")
 				qdel(src)
 			else                        ///When invoked as talisman, stun and mute the target mob.
-				usr.say("Dream sign ''Evil sealing talisman'[pick("'","`")]!")
+				usr.say("N'ath ''raggathnor'[pick("'","`")]!")
 				var/obj/item/weapon/nullrod/N = locate() in T
 				if(N)
 					for(var/mob/O in viewers(T, null))

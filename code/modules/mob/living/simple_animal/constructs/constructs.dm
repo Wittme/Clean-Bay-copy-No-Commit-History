@@ -12,7 +12,7 @@
 	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	universal_speak = 0
+	universal_speak = 1
 	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
 	min_oxy = 0
@@ -27,8 +27,9 @@
 	show_stat_health = 1
 	faction = "cult"
 	supernatural = 1
-	see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	var/guard = 0
 	var/nullblock = 0
+	var/construct_ability = list()
 
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
@@ -44,6 +45,7 @@
 	real_name = name
 	add_language("Cult")
 	add_language("Occult")
+	src.verbs |= construct_ability
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	updateicon()
@@ -58,7 +60,13 @@
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
 	if(istype(user, /mob/living/simple_animal/construct/builder))
 		if(health < maxHealth)
-			adjustBruteLoss(-5)
+			adjustBruteLoss(-5 - ((maxHealth - health)/4))
+			user.visible_message("<span class='notice'>\The [user]</b> mends some of \the [src]'s wounds.</span>")
+		else
+			user << "<span class='notice'>\The [src] is undamaged.</span>"
+	if(istype(user, /mob/living/simple_animal/construct/harvester/forgotten))
+		if(health < maxHealth)
+			adjustBruteLoss(-5 - ((maxHealth - health)/5))
 			user.visible_message("<span class='notice'>\The [user]</b> mends some of \the [src]'s wounds.</span>")
 		else
 			user << "<span class='notice'>\The [src] is undamaged.</span>"
@@ -71,9 +79,9 @@
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
-			msg += "It looks slightly dented.\n"
+			msg += "It has a few seeping wounds.\n"
 		else
-			msg += "<B>It looks severely dented!</B>\n"
+			msg += "<B>Its form is shattered and covered in seeping wounds!</B>\n"
 		msg += "</span>"
 	msg += "*---------*</span>"
 
@@ -111,10 +119,10 @@
 	..()
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
-	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
+	if(istype(P, /obj/item/projectile))
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
-			adjustBruteLoss(P.damage * 0.5)
+			adjustBruteLoss(P.damage * 0.3)
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
@@ -222,10 +230,10 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "harvester"
 	icon_living = "harvester"
-	maxHealth = 150
-	health = 150
-	melee_damage_lower = 25
-	melee_damage_upper = 25
+	maxHealth = 250
+	health = 250
+	melee_damage_lower = 15
+	melee_damage_upper = 15
 	attacktext = "violently stabbed"
 	speed = -1
 	environment_smash = 1
@@ -238,6 +246,166 @@
 			/spell/rune_write
 		)
 
+/mob/living/simple_animal/construct/harvester/forgotten
+	icon_state = "forgotten"
+	icon_living = "forgotten"
+	maxHealth = 350
+	health = 350
+	guard = 40
+	construct_ability = list(
+			/mob/living/carbon/human/proc/leap,
+			/mob/living/carbon/human/proc/FleshMend,
+			/mob/living/carbon/human/proc/BoneMend,
+			/mob/living/carbon/human/proc/OrganMend,
+			/mob/living/carbon/human/proc/sting,
+			/mob/living/simple_animal/construct/harvester/forgotten/proc/ToggleIntent,
+			/mob/living/simple_animal/construct/harvester/forgotten/proc/Toggleguard,
+			/mob/living/simple_animal/construct/proc/toggle_glow,
+			/mob/living/simple_animal/construct/harvester/forgotten/proc/Togglesleep,
+			/mob/living/simple_animal/construct/harvester/forgotten/proc/deleterune,
+			/mob/living/simple_animal/construct/harvester/forgotten/proc/configlight
+		)
+	construct_spells = list(
+//			/spell/targeted/harvest,
+			/spell/aoe_turf/knock/harvester,
+			/spell/rune_write,
+			/spell/aoe_turf/conjure/wall,
+			/spell/aoe_turf/conjure/floor,
+			/spell/aoe_turf/conjure/girder,
+			/spell/aoe_turf/conjure/grille,
+			/spell/aoe_turf/conjure/pylon,
+			/spell/aoe_turf/conjure/soulstone,
+			/spell/aoe_turf/conjure/construct/lesser,
+			/spell/targeted/ethereal_jaunt/shift,
+			/spell/aoe_turf/construct_screech
+		)
+
+/mob/living/simple_animal/construct/harvester/forgotten/proc/Togglesleep()
+	set category = "Abilities"
+	set name = "Toggle Sleep"
+	set desc = "Toggle Sleep"
+	if(usr)
+		var/confirm = alert(src, "This will toggle your sleep state icon, are you sure?", "Message", "Yes", "No")
+		if(confirm != "Yes")
+			return
+	if(src.icon_state == "forgotten_sleeping")
+		src.icon_state = "forgotten_awaken"
+		src.icon_living = "forgotten_awaken"
+		src << "\blue You will now wake."
+		return
+	if(src.icon_state == "forgotten_awaken")
+		src.icon_state = "forgotten"
+		src.icon_living = "forgotten"
+		src << "\blue You are now awake."
+		return
+	if(src.icon_state == "forgotten")
+		src.icon_state = "forgotten_sleep"
+		src.icon_living = "forgotten_sleep"
+		src << "\blue You will now sleep."
+		return
+	if(src.icon_state == "forgotten_sleep")
+		src.icon_state = "forgotten_sleeping"
+		src.icon_living = "forgotten_sleeping"
+		src << "\blue You are now sleeping."
+		return
+
+
+
+
+/mob/living/simple_animal/construct/harvester/forgotten/proc/ToggleIntent()
+	set category = "Abilities"
+	set name = "Intent Intent"
+	set desc = "Toggle Intent"
+
+	if(src.melee_damage_upper == 25)
+		src.melee_damage_lower = 3
+		src.melee_damage_upper = 3
+		src.attacktext = "harvested a small piece of flesh from"
+		src << "\blue You will now harvest."
+		src.attack_sound = ""
+		return
+	if(src.melee_damage_upper == 3)
+		src.melee_damage_lower = 5
+		src.melee_damage_upper = 5
+		src.attacktext = "warningly bashed"
+		src << "\blue You will now bash."
+		src.attack_sound = 'sound/weapons/thudswoosh.ogg'
+		return
+	if(src.melee_damage_upper == 5)
+		src.melee_damage_lower = 10
+		src.melee_damage_upper = 10
+		src.attacktext = "threateningly slashed"
+		src << "\red You will now slash."
+		src.attack_sound = 'sound/weapons/slash.ogg'
+		return
+	if(src.melee_damage_upper == 10)
+		src.melee_damage_lower = 15
+		src.melee_damage_upper = 15
+		src.attacktext = "violently stabbed"
+		src.attack_sound = 'sound/weapons/slice.ogg'
+		src << "\red You will now stab."
+		return
+	if(src.melee_damage_upper == 15)
+		src.melee_damage_lower = 25
+		src.melee_damage_upper = 25
+		src.attacktext = "viciously impaled"
+		src.attack_sound = 'sound/weapons/bladeslice.ogg'
+		src << "\red You will now impale."
+		return
+
+/mob/living/simple_animal/construct/harvester/forgotten/proc/Toggleguard()
+	set category = "Abilities"
+	set name = "Toggle Guard"
+	set desc = "Toggle Guard"
+
+	if(src.guard == 150)
+		src.guard = 40
+		src << "\red You lower your guard."
+		return
+	if(src.guard == 40)
+		src.guard = 150
+		src << "\red You raise your guard."
+		return
+
+/mob/living/simple_animal/construct/harvester/forgotten/proc/deleterune()
+	set category = "Abilities"
+	set name = "Delete Rune"
+	set desc = "Delete Rune"
+
+	for(var/obj/effect/rune/D in src.loc.contents)
+		qdel(D)
+
+/mob/living/simple_animal/construct/harvester/forgotten/proc/configlight()
+	set category = "Abilities"
+	set name = "Light Config"
+	set desc = "Light Config"
+
+	usr.light_power = input("Input light power. Default 2", "Light Power", usr.light_power)
+	usr.light_range = input("Input light range. Default 2", "Light Range ", usr.light_range)
+	usr.light_color = input("Input light color. Default #a62828", "Light Range ", usr.light_color)
+
+
+/mob/living/simple_animal/construct/harvester/forgotten/bullet_act(var/obj/item/projectile/P)
+	if(istype(P, /obj/item/projectile))
+		var/reflectchance = (src.guard - round(P.damage/4))
+		if(prob(reflectchance))
+			adjustBruteLoss(P.damage * 0.2)
+			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
+							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
+
+			// Find a turf near or on the original location to bounce to
+			if(P.starting)
+				var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+				var/turf/curloc = get_turf(src)
+
+				// redirect the projectile
+				P.redirect(new_x, new_y, curloc, src)
+
+			return -1 // complete projectile permutation
+
+	return (..(P))
+
 ////////////////Glow//////////////////
 /mob/living/simple_animal/construct/proc/add_glow()
 	overlays = 0
@@ -246,7 +414,43 @@
 		overlay_layer=TURF_LAYER+0.2
 
 	overlays += image(icon,"glow-[icon_state]",overlay_layer)
-	set_light(2, -2, l_color = "#FFFFFF")
+	set_light(2, 2, l_color = "#a62828")
+
+/mob/living/simple_animal/construct/proc/toggle_glow()
+	set category = "Abilities"
+	set name = "Toggle Glow"
+	set desc = "Toggle Glow"
+	if(usr)
+		var/toggleglowon = alert(src, "Would you like glow enabled?", "Message", "Yes", "No")
+		if(toggleglowon == "No")
+			overlays = 0
+			set_light(0, 0, l_color = "")
+			return
+		var/toggleglow = alert(src, "What would you like enabled?", "Message", "Eyes", "Glow", "Both")
+		if(toggleglow == "Eyes")
+			overlays = 0
+			var/overlay_layer = LIGHTING_LAYER+0.1
+			if(layer != MOB_LAYER)
+				overlay_layer=TURF_LAYER+0.2
+			overlays += image(icon,"glow-[icon_state]",overlay_layer)
+			set_light(0, 0, l_color = "")
+			return
+		if(toggleglow == "Glow")
+			overlays = 0
+			var/overlay_layer = LIGHTING_LAYER+0.1
+			if(layer != MOB_LAYER)
+				overlay_layer=TURF_LAYER+0.2
+			overlays += image(icon,"",overlay_layer)
+			set_light(2, 2, l_color = "#a62828")
+			return
+		if(toggleglow == "Both")
+			overlays = 0
+			var/overlay_layer = LIGHTING_LAYER+0.1
+			if(layer != MOB_LAYER)
+				overlay_layer=TURF_LAYER+0.2
+			overlays += image(icon,"glow-[icon_state]",overlay_layer)
+			set_light(2, 2, l_color = "#a62828")
+			return
 
 ////////////////HUD//////////////////////
 
@@ -326,11 +530,11 @@
 	..()
 	if(healths)
 		switch(health)
-			if(150 to INFINITY)		healths.icon_state = "harvester_health0"
-			if(125 to 149)			healths.icon_state = "harvester_health1"
-			if(100 to 124)			healths.icon_state = "harvester_health2"
-			if(75 to 99)			healths.icon_state = "harvester_health3"
-			if(50 to 74)			healths.icon_state = "harvester_health4"
-			if(25 to 49)			healths.icon_state = "harvester_health5"
-			if(1 to 24)				healths.icon_state = "harvester_health6"
+			if(250 to INFINITY)		healths.icon_state = "harvester_health0"
+			if(200 to 249)			healths.icon_state = "harvester_health1"
+			if(160 to 199)			healths.icon_state = "harvester_health2"
+			if(120 to 159)			healths.icon_state = "harvester_health3"
+			if(70 to 119)			healths.icon_state = "harvester_health4"
+			if(40 to 69)			healths.icon_state = "harvester_health5"
+			if(1 to 39)				healths.icon_state = "harvester_health6"
 			else					healths.icon_state = "harvester_health7"

@@ -225,6 +225,8 @@
 	return
 
 /obj/structure/girder/cult
+	name = "engraved pillar"
+	desc = "The pillar seems almost rudimentary. But, the more you stare, the more you notice the seemingly endless markings. The more you feel a pressure in the back of your skull, and the more you feel the need to avert your eyes."
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
 	health = 250

@@ -2,11 +2,11 @@
 	return
 
 /obj/item/device/soulstone
-	name = "Soul Stone Shard"
+	name = "Unobservable Crystal"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "soulstone"
 	item_state = "electronic"
-	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'. The shard still flickers with a fraction of the full artefacts power."
+	desc = "Your eyes twitch and spasm, as your mind attempts to comprehend its shape alone. Touching it, your fingers sink into flat surfaces, and the larger crevices seemingly protrude. If the migraine settles, you may be able to enjoy its rust-like luster. ... Unless you know what it is."
 	w_class = 2
 	slot_flags = SLOT_BELT
 	origin_tech = "bluespace=4;materials=4"
@@ -85,17 +85,17 @@
 
 ///////////////////////////Transferring to constructs/////////////////////////////////////////////////////
 /obj/structure/constructshell
-	name = "empty shell"
+	name = "inert construct"
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "construct"
-	desc = "A wicked machine used by those skilled in magical arts. It is inactive."
+	desc = "Much like an unfinished mechatronic suit, the thing before you is skeletal, dark, and still. If the room is quiet, a soft, almost unnoticable rumbling can be heard, itching its way behind your eyes."
 
 /obj/structure/constructshell/cultify()
 	return
 
 /obj/structure/constructshell/cult
 	icon_state = "construct-cult"
-	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
+	desc = "Much like an unfinished mechatronic suit, the thing before you is skeletal, dark, and still. If the room is quiet, a soft, almost unnoticable rumbling can be heard, itching its way behind your eyes."
 
 /obj/structure/constructshell/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/device/soulstone))

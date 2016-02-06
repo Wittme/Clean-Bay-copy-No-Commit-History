@@ -143,10 +143,10 @@
 	src.operating = 0
 	return 1
 
-/obj/machinery/door/window/take_damage(var/damage)
+/obj/machinery/door/window/take_damage(var/damage, var/display_message)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
-		shatter()
+		shatter(display_message)
 		return
 
 /obj/machinery/door/window/attack_ai(mob/user as mob)

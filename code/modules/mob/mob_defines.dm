@@ -97,6 +97,8 @@
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
 	var/firstsleempmessage = 30
 	var/secondsleepmessage = 60
+	var/addictedbenevolent_ichor = 0
+	var/addictedmending_ichor = 0
 
 
 	var/name_archive //For admin things like possession
@@ -225,5 +227,3 @@
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
-
-

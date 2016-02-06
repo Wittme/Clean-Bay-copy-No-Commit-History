@@ -225,6 +225,159 @@
 	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, 3)
 
+/datum/reagent/malignant_ichor
+	name = "malignant ichor"
+	id = "malignant_ichor"
+	description = "A diluted ethereal fluid with a malignant intent."
+	reagent_state = LIQUID
+	color = "#f2b907"
+	overdose = 60
+	metabolism = 0.02
+	scannable = 0
+	var/time_delay = 2400
+	var/painstage = 0
+	var/painlevel = 70
+
+/datum/reagent/malignant_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, -painlevel)
+	if((world.time > time_delay) && (painstage == 0))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		M << "<span class='warning'>As the luminescent barbs tear their way out of your tender flesh, agony seizes a vice-like grip on your body. The moments that follow are spent contemplating what you did to deserve subject to such agony.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 1))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>You feel as if the neurons in your brain burn the very synapses they touch. Your palms become clammy, your head becomes light and cold, your jaw chatters, trying to find warmth.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 2))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>A chill goes down your spine as you are overcome by white noise personified in tactile sensation. It almost feels as if your brain is subjected to endless micro-spasms, as your vision un-focuses, and the corners of your eyes twitch.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 3))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>Your teeth go numb, as your body grows cold. Your flesh seemingly burns, however. Much like touching ice,  for too long.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 4))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>You feel a distinct numbness wrap around your retinas. Tears fall from your face, involuntarily, as your tear-duct spasms.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 5))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Your fingernails feel like they curl towards your knuckles as a coldness drips from the tip of your tongue, leading back into the throat.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 6))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Your fingernails split as a searing pain shoots down your molars. The pressure gaping your pupils, almost feeling as if it could prolapse at any moment.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 7))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>This room is your home. You wish to spread your organic matter onto its corridors. Your throat chitters, as a dark, viscous fluid drains from your teeth.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 8))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Grey fluids drip from your tear-ducts. The pressure is becoming too much, you can't think without the pain plaguing your thoughts.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 9))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>As the tendril retracts, you feel as if another eye opens. A painful, malformed slit in your brain squelches into existence, the feeling of rot spreading through your veins.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 10))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>You saw it. Your mind cannot comprehend. Your nerves hiss, as the instinctual fears overcome you.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 11))
+		time_delay = 4400 + (world.time)
+		M << "<span class='warning'>Your world has been shatter by pain.</span>"
+		return
+	if(volume <= 0.41)
+		if(world.time > time_delay)
+			time_delay = 864000
+			painstage = -1
+			M << "<span class='notice'>The crippling pain beings to fade. You can't help but to remember how it felt to live in a world of pain, but in the back of your mind you feel urged to seek out the feeling again.</span>"
+			return
+
+/datum/reagent/benevolent_ichor
+	name = "benevolent ichor"
+	id = "benevolent_ichor"
+	description = "A diluted ethereal fluid with a benevolent intent."
+	reagent_state = LIQUID
+	color = "#f0f207"
+	overdose = 60
+	metabolism = 0.02
+	scannable = 0
+	var/date = 0
+	var/date2 = 0
+
+/datum/reagent/benevolent_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 90)
+	M.add_chemical_effect(CE_STABLE)
+	if(world.time > date && (M.addictedbenevolent_ichor == 0))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, a sense of ease floods your mind. Any pain you may have felt is quickly washed away and replaced by a soothing warmth.</span>"
+		return
+	if(world.time > date && (M.addictedbenevolent_ichor == 1))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, the sense of ease you crave floods your mind.</span>"
+		return
+	if(volume <= 0.41)
+		if(world.time > date2)
+			date2 = 864000
+			M << "<span class='notice'>The feeling you once had beings to fade and you are aware of the tortuous pains of life once again. You can't help but feel urged to seek out a way to relive that pain once again. You want to, no, you need to sate that urge.</span>"
+			M.addictedmending_ichor = 1
+
+
+/datum/reagent/mending_ichor
+	name = "mending ichor"
+	id = "mending_ichor"
+	description = "A diluted ethereal fluid that mends the body."
+	reagent_state = LIQUID
+	color = "#f0f207"
+	overdose = 60
+	metabolism = 0.002
+	scannable = 0
+	var/date = 0
+	var/date2 = 0
+
+/datum/reagent/mending_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 10)
+	M.add_chemical_effect(CE_STABLE)
+	M.adjustCloneLoss(-0.02)
+	M.adjustOxyLoss(-(2 + (M.oxyloss * 0.2)))
+	M.heal_organ_damage(0.02, 0.02)
+	M.adjustToxLoss(-5.0)
+	if(world.time > date && (M.addictedmending_ichor == 0))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, a vigorous feeling of well begins spreads across your body. Any wounds you may have once had begin to mend. You would suspect any future ones would do the same. The feeling is almost... addictive.</span>"
+		return
+	if(world.time > date && (M.addictedmending_ichor == 1))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, the vigorous feeling of well begins you crave spreads across your body.</span>"
+		return
+	if(volume <= 0.01)
+		if(world.time > date2)
+			date2 = 864000
+			M << "<span class='notice'>The vigorous feeling you once had begins to fade and you are aware of how weak your form is. You can't help but feel urged to seek out that vigorous feeling once again. You want to, no, you need to sate that urge.</span>"
+
 /* Other medicine */
 
 /datum/reagent/synaptizine
