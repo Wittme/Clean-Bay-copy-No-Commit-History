@@ -476,7 +476,7 @@
 	if(!(proximity && O.is_open_container()))
 		return
 	user << "You crack \the [src] into \the [O]."
-	reagents.trans_to(O, reagents.total_volume)
+	reagents.trans_to_obj(O, reagents.total_volume)
 	user.drop_from_inventory(src)
 	qdel(src)
 

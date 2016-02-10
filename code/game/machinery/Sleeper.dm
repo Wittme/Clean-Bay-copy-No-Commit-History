@@ -190,6 +190,7 @@
 						pumped++
 					if (ishuman(src.occupant))
 						src.occupant.vessel.trans_to_obj(beaker, pumped + 1)
+						src.occupant.ingested.trans_to_obj(beaker, pumped + 1)
 		src.updateUsrDialog()
 		return
 
