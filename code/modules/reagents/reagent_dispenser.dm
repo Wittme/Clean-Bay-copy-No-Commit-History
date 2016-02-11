@@ -252,7 +252,7 @@
 		reagents.add_reagent("sacid", 1000)
 
 /obj/structure/reagent_dispensers/spaceacillin
-	name = "Sulphuric Acid Dispenser"
+	name = "Spaceacillin Dispenser"
 	desc = "A dispenser of spaceacillin."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "spaceacillintank"
@@ -264,7 +264,7 @@
 		reagents.add_reagent("spaceacillin", 1000)
 
 /obj/structure/reagent_dispensers/radium
-	name = "Sulphuric Acid Dispenser"
+	name = "Radium Dispenser"
 	desc = "A dispenser of radium."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "radiumtank"
