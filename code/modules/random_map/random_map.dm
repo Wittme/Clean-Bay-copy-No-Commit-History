@@ -141,11 +141,11 @@ var/global/list/random_maps = list()
 		if(1)
 			T.ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 		if(2)
-			T.ChangeTurf(/turf/simulated/mineral)
+			T.ChangeTurf(/turf/simulated/mineral/random)
 		if(3)
 			T.ChangeTurf(/turf/simulated/mineral/random)
 		if(4)
-			T.ChangeTurf(/turf/simulated/mineral/random/high_chance)
+			T.ChangeTurf(/turf/simulated/mineral/random)
 
 /datum/random_map/proc/cleanup()
 
