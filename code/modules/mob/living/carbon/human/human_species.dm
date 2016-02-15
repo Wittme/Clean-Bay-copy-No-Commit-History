@@ -1,3 +1,7 @@
+/mob/living/carbon/human
+	real_name = "Test Dummy"
+	status_flags = PASSEMOTES
+
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
@@ -13,7 +17,7 @@
 /mob/living/carbon/human/Kidan/New(var/new_loc)
 	h_style = "Bald"
 	..(new_loc, "Kidan")
-	
+
 /mob/living/carbon/human/tajaran/New(var/new_loc)
 	h_style = "Tajaran Ears"
 	..(new_loc, "Tajara")

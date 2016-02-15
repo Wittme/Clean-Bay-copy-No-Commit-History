@@ -258,7 +258,7 @@
 				createwound(BURN, min(burn,can_inflict))
 				//How much burn damage is left to inflict
 				spillover += max(0, burn - can_inflict)
-		
+
 		//If there are still hurties to dispense
 		if (spillover)
 			owner.shock_stage += spillover * config.organ_damage_spillover_multiplier
@@ -275,7 +275,7 @@
 			//2. If the damage amount dealt exceeds the disintegrate threshold, the organ is completely obliterated.
 			//3. If the organ has already reached or would be put over it's max damage amount (currently redundant),
 			//   and the brute damage dealt exceeds the tearoff threshold, the organ is torn off.
-			
+
 			//Check edge eligibility
 			var/edge_eligible = 0
 			if(edge)
@@ -576,7 +576,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
 				W.damage = max(0, W.damage - 0.2)
 
-			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/40) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
+			owner.vessel.remove_reagent("blood", wound_update_accuracy * W.damage/350) //line should possibly be moved to handle_blood, so all the bleeding stuff is in one place.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [name]!",1)
 
@@ -1061,7 +1061,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "chest"
 	icon_name = "torso"
 	max_damage = 100
-	min_broken_damage = 35
+	min_broken_damage = 50
 	w_class = 5
 	body_part = UPPER_TORSO
 	vital = 1
@@ -1078,7 +1078,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "groin"
 	icon_name = "groin"
 	max_damage = 100
-	min_broken_damage = 35
+	min_broken_damage = 45
 	w_class = 5
 	body_part = LOWER_TORSO
 	vital = 1
@@ -1093,7 +1093,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "left arm"
 	icon_name = "l_arm"
 	max_damage = 50
-	min_broken_damage = 30
+	min_broken_damage = 35
 	w_class = 3
 	body_part = ARM_LEFT
 	parent_organ = "chest"
@@ -1114,7 +1114,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	name = "left leg"
 	icon_name = "l_leg"
 	max_damage = 50
-	min_broken_damage = 30
+	min_broken_damage = 35
 	w_class = 3
 	body_part = LEG_LEFT
 	icon_position = LEFT
@@ -1136,7 +1136,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_foot"
 	name = "left foot"
 	icon_name = "l_foot"
-	min_broken_damage = 15
+	min_broken_damage = 30
 	w_class = 2
 	body_part = FOOT_LEFT
 	icon_position = LEFT
@@ -1163,7 +1163,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	limb_name = "l_hand"
 	name = "left hand"
 	icon_name = "l_hand"
-	min_broken_damage = 15
+	min_broken_damage = 30
 	w_class = 2
 	body_part = HAND_LEFT
 	parent_organ = "l_arm"
@@ -1189,7 +1189,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	icon_name = "head"
 	name = "head"
 	max_damage = 75
-	min_broken_damage = 35
+	min_broken_damage = 50
 	w_class = 3
 	body_part = HEAD
 	vital = 1

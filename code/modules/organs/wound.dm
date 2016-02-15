@@ -120,7 +120,7 @@
 	proc/infection_check()
 		if (damage < 10)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 			return 0
-		if (is_treated() && damage < 25)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
+		if (is_treated() && damage < 15)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
 			return 0
 		if (disinfected)
 			germ_level = 0	//reset this, just in case
@@ -196,11 +196,11 @@
 		if (current_stage > max_bleeding_stage)
 			return 0
 
-		if (bandaged||clamped)
+		if ((bandaged||clamped) && (wound_damage() <= 15 ))
 			return 0
 
-		if (wound_damage() <= 30 && bleed_timer <= 0)
-			return 0	//Bleed timer has run out. Wounds with more than 30 damage don't stop bleeding on their own.
+		if (wound_damage() <= 18 && bleed_timer <= 0)
+			return 0	//Bleed timer has run out. Wounds with more than 18 damage don't stop bleeding on their own.
 
 		return (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5)
 
@@ -214,31 +214,31 @@
 	switch(type)
 		if(CUT)
 			switch(damage)
-				if(70 to INFINITY)
+				if(60 to INFINITY)
 					return /datum/wound/cut/massive
-				if(60 to 70)
-					return /datum/wound/cut/gaping_big
 				if(50 to 60)
+					return /datum/wound/cut/gaping_big
+				if(40 to 50)
 					return /datum/wound/cut/gaping
-				if(25 to 50)
+				if(20 to 40)
 					return /datum/wound/cut/flesh
-				if(15 to 25)
+				if(10 to 20)
 					return /datum/wound/cut/deep
-				if(0 to 15)
+				if(0 to 10)
 					return /datum/wound/cut/small
 		if(BRUISE)
 			return /datum/wound/bruise
 		if(BURN)
 			switch(damage)
-				if(50 to INFINITY)
+				if(40 to INFINITY)
 					return /datum/wound/burn/carbonised
-				if(40 to 50)
-					return /datum/wound/burn/deep
 				if(30 to 40)
+					return /datum/wound/burn/deep
+				if(20 to 30)
 					return /datum/wound/burn/severe
-				if(15 to 30)
+				if(10 to 20)
 					return /datum/wound/burn/large
-				if(0 to 15)
+				if(0 to 10)
 					return /datum/wound/burn/moderate
 	return null //no wound
 
@@ -257,7 +257,7 @@
 	damage_type = CUT
 
 /datum/wound/cut/flesh
-	max_bleeding_stage = 4
+	max_bleeding_stage = 3
 	stages = list("ugly ripped flesh wound" = 35, "ugly flesh wound" = 30, "flesh wound" = 25, "blood soaked clot" = 15, "large scab" = 5, "fresh skin" = 0)
 	damage_type = CUT
 
@@ -281,7 +281,7 @@ datum/wound/cut/massive
 	stages = list("monumental bruise" = 80, "huge bruise" = 50, "large bruise" = 30,
 				  "moderate bruise" = 20, "small bruise" = 10, "tiny bruise" = 5)
 	max_bleeding_stage = 3 //only large bruise and above can bleed.
-	autoheal_cutoff = 30
+	autoheal_cutoff = 15
 	damage_type = BRUISE
 
 /** BURNS **/
@@ -318,15 +318,15 @@ datum/wound/cut/massive
 /datum/wound/lost_limb/New(var/obj/item/organ/external/lost_limb, var/losstype, var/clean)
 	var/damage_amt = lost_limb.max_damage
 	if(clean) damage_amt /= 2
-	
+
 	switch(losstype)
 		if(DROPLIMB_EDGE, DROPLIMB_BLUNT)
 			damage_type = CUT
 			max_bleeding_stage = 3 //clotted stump and above can bleed.
 			stages = list(
 				"ripped stump" = damage_amt*1.3,
-				"bloody stump" = damage_amt, 
-				"clotted stump" = damage_amt*0.5, 
+				"bloody stump" = damage_amt,
+				"clotted stump" = damage_amt*0.5,
 				"scarred stump" = 0
 				)
 		if(DROPLIMB_BURN)
@@ -337,7 +337,7 @@ datum/wound/cut/massive
 				"scarred stump" = damage_amt*0.5,
 				"scarred stump" = 0
 				)
-	
+
 	..(damage_amt)
 
 /datum/wound/lost_limb/can_merge(var/datum/wound/other)
