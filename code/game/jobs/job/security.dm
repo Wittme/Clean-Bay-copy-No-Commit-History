@@ -14,11 +14,11 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
-			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_deptguard)
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_deptguard, access_paramedic, access_blueshield)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
-			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_deptguard)
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_deptguard, access_paramedic, access_blueshield)
 	alt_titles = list("Security Commander")
 	minimal_player_age = 14
 
@@ -200,7 +200,7 @@
 	supervisors = "the head of security and the head of your guarded department"
 	selection_color = "#ffeeee"
 	access = list(access_deptguard, access_security)
-	minimal_access = list(access_deptguard, access_security)
+	minimal_access = list(access_deptguard, access_security, access_sec_doors, access_maint_tunnels)
 	minimal_player_age = 3
 	var/medical = 0
 	var/engine = 0
