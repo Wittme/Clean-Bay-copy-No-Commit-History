@@ -17,6 +17,7 @@
 	icon_state = "door_open"
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	opacity = 0
+	p_open = 1
 	density = 0
 	layer = DOOR_OPEN_LAYER - 0.01
 	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open

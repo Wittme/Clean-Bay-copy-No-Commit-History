@@ -139,10 +139,14 @@
 			if(M.density)
 				spawn(0)
 					M.open()
+					for(var/turf/simulated/floor/L in M.locs)
+						L.set_opacity(0)
 					return
 			else
 				spawn(0)
 					M.close()
+					for(var/turf/simulated/floor/L in M.locs)
+						L.set_opacity(1)
 					return
 
 /*

@@ -144,7 +144,7 @@
 	if(stat & BROKEN)
 		stat &= ~BROKEN
 
-		
+
 /obj/machinery/door/blast/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return 1
 	return ..()
@@ -160,6 +160,16 @@ obj/machinery/door/blast/regular
 	icon_state_closing = "pdoorc1"
 	icon_state = "pdoor1"
 	maxhealth = 600
+
+obj/machinery/door/blast/regular/multi/two
+	icon = 'icons/obj/doors/1x2blast.dmi'
+	maxhealth = 1200
+	width = 2
+
+obj/machinery/door/blast/regular/multi/fourw
+	icon = 'icons/obj/doors/1x4blast_hor.dmi'
+	maxhealth = 2400
+	width = 4
 
 // SUBTYPE: Shutters
 // Nicer looking, and also weaker, shutters. Found in kitchen and similar areas.
