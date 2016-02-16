@@ -292,6 +292,8 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_player_panel,
 	/client/proc/check_antagonists,
 	/client/proc/jobbans,
+	/client/proc/freeze,
+	/client/proc/freezemecha,
 	/client/proc/cmd_admin_subtle_message,	/*send an message to somebody as a 'voice in their head'*/\
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/forceshuttles,
@@ -306,8 +308,8 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
-	/client/proc/freeze,
-	/client/proc/freezemecha,
+//	/client/proc/freeze,
+//	/client/proc/freezemecha,
 	/client/proc/sendFax //*allows us to send a fax to a specific fax machine.*/
 )
 
