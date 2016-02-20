@@ -457,7 +457,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += ""<a href=\"http://www.prospector-station.com/forums\">"
+	s += "<a href=\"http://www.prospector-station.com/forums\">"
 //	s += "[game_version]"
 	s += "Forums"
 	s += "</a>"
