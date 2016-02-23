@@ -257,3 +257,77 @@
 
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 	qdel(src)
+
+/mob/living/carbon/human/proc/FleshMend()
+	set category = "Abilities"
+	set name = "FleshMend"
+	set desc = "Mend the flesh of another."
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(1,src))
+		choices += M
+	choices -= src
+
+	var/mob/living/T = input(src,"Who do you wish to mend?") as null|anything in choices
+
+	if(T.getBruteLoss()) T.heal_organ_damage(5)
+	if(T.getOxyLoss()) T.adjustOxyLoss(20)
+	if(T.getFireLoss()) T.heal_organ_damage(5)
+	if(T.getToxLoss()) T.adjustToxLoss(5)
+	T.health = T.health + 50
+	..()
+	return
+
+/mob/living/carbon/human/proc/BoneMend()
+	set category = "Abilities"
+	set name = "BoneMend"
+	set desc = "Mend the bone of another."
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(1,src))
+		choices += M
+	choices -= src
+
+	var/mob/living/T = input(src,"Who do you wish to mend?") as null|anything in choices
+
+	var/list/broken = list()
+	for(var/obj/item/organ/external/O in T.contents)
+		if(O.status > 0)
+			broken += O
+		broken -= src
+	var/obj/item/organ/external/Y = input(src,"What do you wish to mend?") as null|anything in broken
+	Y.mend_fracture()
+
+/mob/living/carbon/human/proc/OrganMend()
+	set category = "Abilities"
+	set name = "OrganMend"
+	set desc = "Mend the organs of another."
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(1,src))
+		choices += M
+	choices -= src
+
+	var/mob/living/T = input(src,"Who do you wish to mend?") as null|anything in choices
+
+	var/list/broken = list()
+	for(var/obj/item/organ/O in T.contents)
+		if(O.damage > 0)
+			broken += O
+		broken -= src
+	var/obj/item/organ/Y = input(src,"What do you wish to mend?") as null|anything in broken
+	Y.damage -= 10
+
+/mob/living/carbon/human/proc/sting()
+	set category = "Abilities"
+	set name = "Sting"
+	set desc = "Sting another."
+
+	var/list/choices = list()
+	for(var/mob/living/M in view(1,src))
+		choices += M
+	choices -= src
+	var/chemicals = list("benevolent_ichor", "malignant_ichor", "mending_ichor", "bicaridine", "kelotane", "anti_toxin", "dexalin", "inaprovaline", "cryptobiolin", "hyperzine", "nutriment")
+	var/mob/living/T = input(src,"Who do you wish to sting?") as null|anything in choices
+	var/obj/item/organ/external/C = input(src,"What do you wish to inject?") as null|anything in chemicals
+	T.reagents.add_reagent(C, 5)

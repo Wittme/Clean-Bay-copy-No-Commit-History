@@ -42,3 +42,45 @@
 		for(var/obj/machinery/door/door in T.contents)
 			spawn door.cultify()
 	return
+
+/spell/aoe_turf/construct_screech
+	name = "Screech"
+	desc = "An extremely loud shriek."
+	school = "destruction"
+	charge_max = 60
+	spell_flags = 0
+	invocation = "none"
+	invocation_type = SpI_NONE
+	hud_state = "artificer"
+	range = 6
+
+/spell/aoe_turf/construct_screech/cast(list/targets)
+	src << "\red You let out a loud shriek."
+	for(var/turf/T in targets)
+		for(var/obj/machinery/door/window/WD in T.contents)
+			if(prob(60))
+				WD.take_damage(15, 0)
+			if(prob(40))
+				WD.take_damage(25, 0)
+			if(prob(20))
+				WD.take_damage(35, 0)
+			if(prob(10))
+				WD.take_damage(45, 0)
+		for(var/obj/structure/window/W in T.contents)
+			if(prob(60))
+				W.take_damage_remote(5)
+			if(prob(40))
+				W.take_damage_remote(10)
+			if(prob(20))
+				W.take_damage_remote(15)
+			if(prob(10))
+				W.take_damage_remote(20)
+		for(var/obj/machinery/light/L in T.contents)
+			if(prob(20))
+				L.damaged_remote(50)
+		for(var/mob/living/M in T.contents)
+			shake_camera(M,15)
+			if(!(istype(M,/mob/living/simple_animal/construct)))
+				M << "<span class='warning'><font size='3'><b>Your mind is assaulted by an other worldly shriek.</font></b></span>"
+		for(var/mob/living/simple_animal/construct/harvester/forgotten/H in T.contents)
+			playsound(H.loc, 'sound/effects/Construct_Screech.ogg', 100, 1)

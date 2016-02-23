@@ -239,7 +239,7 @@ var/list/name_to_material
 	opacity = 0.4
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 100
+	hardness = 85
 	stack_origin_tech = "materials=6"
 	stack_per_sheet = 3750
 
@@ -345,6 +345,20 @@ var/list/name_to_material
 	weight = 23
 	stack_origin_tech = "materials=2"
 	composite_material = list(DEFAULT_WALL_MATERIAL = 3750, "platinum" = 3750) //todo
+
+/material/tungsten
+	name = "tungsten"
+	stack_type = /obj/item/stack/material/tungsten
+	icon_colour = "#6a768a"
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
+	melting_point = 3700
+	stack_origin_tech = "materials=6"
+	cut_delay = 60
+	explosion_resistance = 30
+	integrity = 600
+	hardness = 90
+	weight = 25
 
 /material/glass
 	name = "glass"

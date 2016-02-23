@@ -273,6 +273,8 @@ proc/tg_list2text(list/list, glue=",")
 		else                return ICON_OVERLAY
 
 // Converts a rights bitfield into a string
+
+/*
 /proc/rights2text(rights,seperator="")
 	if (rights & R_BUILDMODE)   . += "[seperator]+BUILDMODE"
 	if (rights & R_ADMIN)       . += "[seperator]+ADMIN"
@@ -289,6 +291,28 @@ proc/tg_list2text(list/list, glue=",")
 	if (rights & R_SPAWN)       . += "[seperator]+SPAWN"
 	if (rights & R_MOD)         . += "[seperator]+MODERATOR"
 	if (rights & R_MENTOR)      . += "[seperator]+MENTOR"
+	return .
+*/
+
+/proc/rights2text(rights,seperator="")
+//	if(rights & R_AUDITOR)		. += "[seperator]+AUDITOR"
+	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
+//	if(rights & R_DEV)			. += "[seperator]+DEV"
+	if(rights & R_MOD)			. += "[seperator]+MOD"
+	if(rights & R_BAN)			. += "[seperator]+MOD2"
+	if(rights & R_POSSESS)		. += "[seperator]+MOD3"
+	if(rights & R_ADMIN)		. += "[seperator]+ADMIN"
+	if(rights & R_SERVER)		. += "[seperator]+ADMIN2"
+	if(rights & R_FUN)			. += "[seperator]+ADMIN3"
+	if(rights & R_DEBUG)		. += "[seperator]+HEADADMIN"
+	if(rights & R_PERMISSIONS)	. += "[seperator]+GAMEMASTER"
+	if (rights & R_SPAWN)       . += "[seperator]+SPAWN"
+	if (rights & R_VAREDIT)     . += "[seperator]+VAREDIT"
+	if (rights & R_REJUVINATE)  . += "[seperator]+REJUVINATE"
+	if (rights & R_STEALTH)     . += "[seperator]+STEALTH"
+	if (rights & R_BUILDMODE)   . += "[seperator]+BUILDMODE"
+	if(rights & R_SOUNDS)		. += "[seperator]+SOUND"
+
 	return .
 
 /proc/ui_style2icon(ui_style)

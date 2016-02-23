@@ -1,16 +1,3 @@
-{{if data.change_race}}
-    <div class="item">
-        <div class="itemLabelNarrow">
-            Species:
-        </div>
-        <div class="itemContentWide">
-            {{for data.species}}
-                {{:helper.link(value.specimen, null, { 'race' : value.specimen}, null, data.specimen == value.specimen ? 'selected' : null)}}
-            {{/for}}
-        </div>
-    </div>
-{{/if}}
-
 {{if data.change_gender}}
     <div class="item">
         <div class="itemLabelNarrow">

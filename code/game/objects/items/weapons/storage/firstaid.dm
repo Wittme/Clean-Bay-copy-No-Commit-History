@@ -131,6 +131,9 @@
 /obj/item/weapon/storage/firstaid/surgery
 	name = "surgery kit"
 	desc = "Contains tools for surgery. Has precise foam fitting for safe transport."
+	icon_state = "purplefirstaid"
+	storage_slots = 10
+	can_hold = list(/obj/item/weapon/bonesetter,/obj/item/weapon/cautery,/obj/item/weapon/circular_saw,/obj/item/weapon/hemostat,/obj/item/weapon/retractor,/obj/item/weapon/scalpel,/obj/item/weapon/surgicaldrill,/obj/item/weapon/bonegel,/obj/item/weapon/FixOVein,/obj/item/stack/medical/advanced/bruise_pack)
 
 /obj/item/weapon/storage/firstaid/surgery/New()
 	..()
@@ -289,6 +292,20 @@
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
+
+/obj/item/weapon/storage/pill_bottle/paracetamol
+	name = "bottle of Paracetamol pills"
+	desc = "Contains pills used to relieve minor pain."
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
 
 /obj/item/weapon/storage/pill_bottle/citalopram
 	name = "bottle of Citalopram pills"

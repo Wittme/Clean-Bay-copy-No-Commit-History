@@ -13,6 +13,36 @@
 	var/new_name = "[pick(list("To Sleep Beneath","Wind Over","Embrace of","Dreams of","Witnessing","To Walk Beneath","Approaching the"))]"
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
+	
+/datum/language/kidan
+	name = "Chittin"
+	desc = "The Kidan language."
+	speech_verb = "chirps and hums"
+	ask_verb = "chirps and hums"
+	exclaim_verb = "chirps"
+	colour = "Chittin"
+	key = "z"
+	flags = RESTRICTED
+	syllables = list("zz", "zzz", "mm", "ti")
+
+/datum/language/machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "pings"
+	colour = "machine"
+	key = "-"
+	flags = RESTRICTED
+	syllables = list("beep", "boop", "buzz","beepleep","*","!")
+	
+/datum/language/Aviskree
+	name = "Aviachirp"
+	desc = "An expressive language is very beautiful except when you want to sleep."
+	speech_verb = "chirps"
+	colour = "Aviskree"
+	key = "]"
+	flags = RESTRICTED
 
 /datum/language/unathi
 	name = "Sinta'unathi"
@@ -22,7 +52,7 @@
 	exclaim_verb = "roars"
 	colour = "soghun"
 	key = "o"
-	flags = WHITELISTED
+	flags = RESTRICTED
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
 /datum/language/unathi/get_random_name()
@@ -40,7 +70,7 @@
 	exclaim_verb = "yowls"
 	colour = "tajaran"
 	key = "j"
-	flags = WHITELISTED
+	flags = RESTRICTED
 	syllables = list("mrr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr",
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
 	"ka","aasi","far","wa","baq","ara","qara","zir","sam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
@@ -63,7 +93,7 @@
 	exclaim_verb = "warbles"
 	colour = "skrell"
 	key = "k"
-	flags = WHITELISTED
+	flags = RESTRICTED
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/human

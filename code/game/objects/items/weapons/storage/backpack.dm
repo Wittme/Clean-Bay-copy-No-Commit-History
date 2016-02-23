@@ -76,7 +76,7 @@
 			return
 			*/
 		..()
-	
+
 	//Please don't clutter the parent storage item with stupid hacks.
 	can_be_inserted(obj/item/W as obj, stop_messages = 0)
 		if(istype(W, /obj/item/weapon/storage/backpack/holding))
@@ -174,6 +174,7 @@
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
+	storage_slots = 14
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
 	New()

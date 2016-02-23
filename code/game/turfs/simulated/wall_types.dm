@@ -4,9 +4,13 @@
 	..(newloc, "plasteel","plasteel") //3strong
 
 /turf/simulated/wall/cult
+	name = "engraved wall"
 	icon_state = "cult"
+	desc = "The walls feel as though they carry some sort of knowledge, intricately carved into it, the esoteric writings and imagery almost make it seem as if it were laid by a mason, rather than a course slab being engraved."
 /turf/simulated/wall/cult/New(var/newloc)
 	..(newloc,"cult","cult2")
+	name = "engraved wall"
+	desc = "The walls feel as though they carry some sort of knowledge, intricately carved into it, the esoteric writings and imagery almost make it seem as if it were laid by a mason, rather than a course slab being engraved."
 /turf/unsimulated/wall/cult
 	name = "cult wall"
 	desc = "Hideous images dance beneath the surface."

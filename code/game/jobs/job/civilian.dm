@@ -262,6 +262,7 @@
 	selection_color = "#dddddd"
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
+	alt_titles = list("Interior Cleaner")
 
 
 	equip(var/mob/living/carbon/human/H)

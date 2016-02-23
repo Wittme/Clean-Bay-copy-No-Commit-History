@@ -95,6 +95,11 @@
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
 	var/facing_dir = null   // Used for the ancient art of moonwalking.
+	var/firstsleempmessage = 30
+	var/secondsleepmessage = 60
+	var/addictedbenevolent_ichor = 0
+	var/addictedmending_ichor = 0
+
 
 	var/name_archive //For admin things like possession
 
@@ -222,5 +227,3 @@
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
-
-

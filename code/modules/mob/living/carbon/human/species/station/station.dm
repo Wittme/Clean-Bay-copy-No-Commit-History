@@ -229,7 +229,7 @@
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	language = "Tradeband"
+	language = "Encoded Audio Language"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 
@@ -266,3 +266,34 @@
 		H.h_style = ""
 		spawn(100)
 			if(H) H.update_hair()
+/datum/species/kidan
+	name = "Kidan"
+	name_plural = "Kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_types = list(/datum/unarmed_attack/claws)
+	brute_mod = 0.7
+	burn_mod = 1.6
+	darksight = 8
+
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS
+
+	blood_color = "#328332"
+	flesh_color = "#8C4600"
+
+/datum/species/Aviskree //I'm not finished with the aviskree, yet. I'll update them further, in time.
+	name = "Aviskree"
+	icobase = 'icons/mob/human_races/r_Aviskree.dmi'
+	deform = 'icons/mob/human_races/r_def_Aviskree.dmi'
+	language = "Aviachirp"
+	tail = "aviskreetail"
+	blurb = "A tall avian species, Aviskree originally hail from Avis, of the Aindege system, \
+ 	a heavily forested planet of avian species, <br/> <br/> The Aviskree live in a tradition \
+ 	heavy society with a tech level resembling that of early 2000s earth with advances in electricity. \
+ 	They are still acclimating to human society, and their native language is Aviachirp, a language made mostly of high pitched chirps."
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS | HAS_SKIN_COLOR
+	unarmed_types = list(/datum/unarmed_attack/claws, /datum/unarmed_attack/bite/strong)
+	darksight = 10
+	brute_mod = 1.3

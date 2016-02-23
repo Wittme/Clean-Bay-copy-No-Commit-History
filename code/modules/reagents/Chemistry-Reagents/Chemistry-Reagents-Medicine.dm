@@ -7,7 +7,7 @@
 	reagent_state = LIQUID
 	color = "#00BFFF"
 	overdose = REAGENTS_OVERDOSE * 2
-	metabolism = REM * 0.5
+	metabolism = REM * 0.25
 	scannable = 1
 
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -81,7 +81,7 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
 	else if(alien != IS_DIONA)
-		M.adjustOxyLoss(-15 * removed)
+		M.adjustOxyLoss((-15 * removed) - (M.oxyloss * 0.01))
 
 	holder.remove_reagent("lexorin", 2 * removed)
 
@@ -98,7 +98,7 @@
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 9)
 	else if(alien != IS_DIONA)
-		M.adjustOxyLoss(-300 * removed)
+		M.adjustOxyLoss((-300 * removed) - (M.oxyloss * 0.01))
 
 	holder.remove_reagent("lexorin", 3 * removed)
 
@@ -112,9 +112,33 @@
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.adjustOxyLoss(-6 * removed)
+		M.adjustOxyLoss((-6 * removed) - (M.oxyloss * 0.01))
 		M.heal_organ_damage(3 * removed, 3 * removed)
 		M.adjustToxLoss(-3 * removed)
+
+/datum/reagent/tricordrazinemoror
+	name = "Tricordrazinemoror"
+	id = "tricordrazinemoror"
+	description = "Tricordrazinemoror is a mixture of tricordrazine with tungsten disilica acting as a chemical inhibitor."
+	reagent_state = LIQUID
+	color = "#694aa7"
+	metabolism = REM * 0.0125
+	scannable = 0
+
+/datum/reagent/tricordrazinemoror/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		if(volume >= 5)
+			M.adjustToxLoss(-3 * removed * 24)
+			M.adjustOxyLoss((-6 * removed * 4) - (M.oxyloss * 0.01))
+			M.heal_organ_damage(3 * removed * 24, 3 * removed * 24)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				H.vessel.remove_reagent("blood", 0.5)
+		else
+			M.adjustToxLoss(-3 * removed * 24)
+			M.adjustOxyLoss((-6 * removed * 4) - (M.oxyloss * 0.01))
+			M.heal_organ_damage(3 * removed * 24, 3 * removed * 24)
+			M.add_chemical_effect(CE_STABLE)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
@@ -158,7 +182,7 @@
 	color = "#C8A5DC"
 	overdose = 60
 	scannable = 1
-	metabolism = 0.02
+	metabolism = REM * 0.05
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 50)
@@ -201,6 +225,159 @@
 	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, 3)
 
+/datum/reagent/malignant_ichor
+	name = "malignant ichor"
+	id = "malignant_ichor"
+	description = "A diluted ethereal fluid with a malignant intent."
+	reagent_state = LIQUID
+	color = "#f2b907"
+	overdose = 60
+	metabolism = 0.02
+	scannable = 0
+	var/time_delay = 2400
+	var/painstage = 0
+	var/painlevel = 70
+
+/datum/reagent/malignant_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, -painlevel)
+	if((world.time > time_delay) && (painstage == 0))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		M << "<span class='warning'>As the luminescent barbs tear their way out of your tender flesh, agony seizes a vice-like grip on your body. The moments that follow are spent contemplating what you did to deserve subject to such agony.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 1))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>You feel as if the neurons in your brain burn the very synapses they touch. Your palms become clammy, your head becomes light and cold, your jaw chatters, trying to find warmth.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 2))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>A chill goes down your spine as you are overcome by white noise personified in tactile sensation. It almost feels as if your brain is subjected to endless micro-spasms, as your vision un-focuses, and the corners of your eyes twitch.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 3))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 10
+		M << "<span class='warning'>Your teeth go numb, as your body grows cold. Your flesh seemingly burns, however. Much like touching ice,  for too long.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 4))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>You feel a distinct numbness wrap around your retinas. Tears fall from your face, involuntarily, as your tear-duct spasms.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 5))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Your fingernails feel like they curl towards your knuckles as a coldness drips from the tip of your tongue, leading back into the throat.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 6))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Your fingernails split as a searing pain shoots down your molars. The pressure gaping your pupils, almost feeling as if it could prolapse at any moment.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 7))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>This room is your home. You wish to spread your organic matter onto its corridors. Your throat chitters, as a dark, viscous fluid drains from your teeth.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 8))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>Grey fluids drip from your tear-ducts. The pressure is becoming too much, you can't think without the pain plaguing your thoughts.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 9))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>As the tendril retracts, you feel as if another eye opens. A painful, malformed slit in your brain squelches into existence, the feeling of rot spreading through your veins.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 10))
+		time_delay = 1800 + (world.time)
+		painstage += 1
+		painlevel += 5
+		M << "<span class='warning'>You saw it. Your mind cannot comprehend. Your nerves hiss, as the instinctual fears overcome you.</span>"
+		return
+	if((world.time > time_delay) && (painstage == 11))
+		time_delay = 4400 + (world.time)
+		M << "<span class='warning'>Your world has been shatter by pain.</span>"
+		return
+	if(volume <= 0.41)
+		if(world.time > time_delay)
+			time_delay = 864000
+			painstage = -1
+			M << "<span class='notice'>The crippling pain beings to fade. You can't help but to remember how it felt to live in a world of pain, but in the back of your mind you feel urged to seek out the feeling again.</span>"
+			return
+
+/datum/reagent/benevolent_ichor
+	name = "benevolent ichor"
+	id = "benevolent_ichor"
+	description = "A diluted ethereal fluid with a benevolent intent."
+	reagent_state = LIQUID
+	color = "#f0f207"
+	overdose = 60
+	metabolism = 0.02
+	scannable = 0
+	var/date = 0
+	var/date2 = 0
+
+/datum/reagent/benevolent_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 90)
+	M.add_chemical_effect(CE_STABLE)
+	if(world.time > date && (M.addictedbenevolent_ichor == 0))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, a sense of ease floods your mind. Any pain you may have felt is quickly washed away and replaced by a soothing warmth.</span>"
+		return
+	if(world.time > date && (M.addictedbenevolent_ichor == 1))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, the sense of ease you crave floods your mind.</span>"
+		return
+	if(volume <= 0.41)
+		if(world.time > date2)
+			date2 = 864000
+			M << "<span class='notice'>The feeling you once had beings to fade and you are aware of the tortuous pains of life once again. You can't help but feel urged to seek out a way to relive that pain once again. You want to, no, you need to sate that urge.</span>"
+			M.addictedmending_ichor = 1
+
+
+/datum/reagent/mending_ichor
+	name = "mending ichor"
+	id = "mending_ichor"
+	description = "A diluted ethereal fluid that mends the body."
+	reagent_state = LIQUID
+	color = "#f0f207"
+	overdose = 60
+	metabolism = 0.002
+	scannable = 0
+	var/date = 0
+	var/date2 = 0
+
+/datum/reagent/mending_ichor/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, 10)
+	M.add_chemical_effect(CE_STABLE)
+	M.adjustCloneLoss(-0.02)
+	M.adjustOxyLoss(-(2 + (M.oxyloss * 0.2)))
+	M.heal_organ_damage(0.02, 0.02)
+	M.adjustToxLoss(-5.0)
+	if(world.time > date && (M.addictedmending_ichor == 0))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, a vigorous feeling of well begins spreads across your body. Any wounds you may have once had begin to mend. You would suspect any future ones would do the same. The feeling is almost... addictive.</span>"
+		return
+	if(world.time > date && (M.addictedmending_ichor == 1))
+		date = 864000
+		M << "<span class='notice'>As the luminescent barbs ease their way out of your flesh, the vigorous feeling of well begins you crave spreads across your body.</span>"
+		return
+	if(volume <= 0.01)
+		if(world.time > date2)
+			date2 = 864000
+			M << "<span class='notice'>The vigorous feeling you once had begins to fade and you are aware of how weak your form is. You can't help but feel urged to seek out that vigorous feeling once again. You want to, no, you need to sate that urge.</span>"
+
 /* Other medicine */
 
 /datum/reagent/synaptizine
@@ -216,11 +393,16 @@
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+	if(M.eye_blurry > 2)
+		M.eye_blurry = max(M.eye_blurry - 6, 2)
+	M.sleeping = max(M.sleeping - 5, 0)
 	M.drowsyness = max(M.drowsyness - 5, 0)
-	M.AdjustParalysis(-1)
-	M.AdjustStunned(-1)
-	M.AdjustWeakened(-1)
-	holder.remove_reagent("mindbreaker", 5)
+	M.AdjustParalysis(-3)
+	M.AdjustStunned(-3)
+	M.AdjustWeakened(-3)
+	holder.remove_reagent("mindbreaker", 3)
+	holder.remove_reagent("stoxin", 0.2)
+	holder.remove_reagent("chloralhydrate", 0.7)
 	M.hallucination = max(0, M.hallucination - 10)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 40)
@@ -266,7 +448,7 @@
 	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
 	reagent_state = LIQUID
 	color = "#561EC3"
-	overdose = 10
+	overdose = REAGENTS_OVERDOSE / 3
 	scannable = 1
 
 /datum/reagent/peridaxon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -276,6 +458,27 @@
 		for(var/obj/item/organ/I in H.internal_organs)
 			if((I.damage > 0) && (I.robotic != 2)) //Peridaxon heals only non-robotic organs
 				I.damage = max(I.damage - removed, 0)
+
+/datum/reagent/peridaxonmoror
+	name = "Peridaxonmoror"
+	id = "peridaxonmoror"
+	description = "Peridaxon with tungsten disilica acting as a chemical inhibitor."
+	reagent_state = LIQUID
+	color = "#5f4296"
+	overdose = REAGENTS_OVERDOSE
+	scannable = 0
+	metabolism = REM * 0.0125
+
+/datum/reagent/peridaxonmoror/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+
+		for(var/obj/item/organ/I in H.internal_organs)
+			if((I.damage >= 0) && (I.robotic != 2)) //Peridaxon heals only non-robotic organs
+				if(volume >= 5)
+					I.damage = min(I.damage + (removed * 5), 30)
+				else
+					I.damage = max(I.damage + (removed * 40), 0)
 
 /datum/reagent/ryetalyn
 	name = "Ryetalyn"

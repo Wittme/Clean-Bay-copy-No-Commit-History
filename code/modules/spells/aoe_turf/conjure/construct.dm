@@ -1,5 +1,4 @@
 //////////////////////////////Construct Spells/////////////////////////
-
 /spell/aoe_turf/conjure/construct
 	name = "Artificer"
 	desc = "This spell conjures a construct which may be controlled by Shades"
@@ -30,7 +29,7 @@
 	invocation = "none"
 	invocation_type = SpI_NONE
 	range = 0
-	summon_type = list(/turf/simulated/floor/engine/cult)
+	summon_type = list(/turf/simulated/floor/cult)
 
 	hud_state = "const_floor"
 
@@ -44,7 +43,7 @@
 	name = "Lesser Construction"
 	desc = "This spell constructs a cult wall"
 
-	charge_max = 100
+	charge_max = 60
 	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
 	invocation = "none"
 	invocation_type = SpI_NONE
@@ -53,7 +52,45 @@
 
 	hud_state = "const_wall"
 
-/spell/aoe_turf/conjure/wall/conjure_animation(var/atom/movable/overlay/animation, var/turf/target)
+/spell/aoe_turf/conjure/grille/conjure_animation(var/atom/movable/overlay/animation, var/turf/target)
+	animation.icon_state = "cultwall"
+	flick("cultwall",animation)
+	spawn(10)
+		qdel(animation)
+
+/spell/aoe_turf/conjure/grille
+	name = "Grille Construction"
+	desc = "This spell constructs a cult grille"
+
+	charge_max = 30
+	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
+	invocation = "none"
+	invocation_type = SpI_NONE
+	range = 0
+	summon_type = list(/obj/structure/grille/cult)
+
+	hud_state = "const_grille"
+
+/spell/aoe_turf/conjure/grille/conjure_animation(var/atom/movable/overlay/animation, var/turf/target)
+	animation.icon_state = "cultwall"
+	flick("cultwall",animation)
+	spawn(10)
+		qdel(animation)
+
+/spell/aoe_turf/conjure/girder
+	name = "Girder Construction"
+	desc = "This spell constructs a cult girder"
+
+	charge_max = 30
+	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
+	invocation = "none"
+	invocation_type = SpI_NONE
+	range = 0
+	summon_type = list(/obj/structure/girder/cult)
+
+	hud_state = "const_girder"
+
+/spell/aoe_turf/conjure/girder/conjure_animation(var/atom/movable/overlay/animation, var/turf/target)
 	animation.icon_state = "cultwall"
 	flick("cultwall",animation)
 	spawn(10)

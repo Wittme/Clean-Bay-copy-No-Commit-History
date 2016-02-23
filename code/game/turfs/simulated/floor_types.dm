@@ -70,11 +70,12 @@
 			F.make_plating()
 			return
 
-/turf/simulated/floor/engine/cult
+/turf/simulated/floor/cult
 	name = "engraved floor"
 	icon_state = "cult"
+	desc = "The floor seemingly amplifies your footfall, as your feet cover indescribable markings over a peculiar, textured stone floor."
 
-/turf/simulated/floor/engine/cult/cultify()
+/turf/simulated/floor/cult/cultify()
 	return
 
 /turf/simulated/floor/engine/n20
